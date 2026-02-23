@@ -1,7 +1,7 @@
 .card-name {
   display: flex;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 55px;
+  font-size: 50px;
   color: rgb(205, 61, 85);
   margin: auto;
   max-width: fit-content;
@@ -10,9 +10,8 @@
   display: inline-flex;
   padding: 4.5px 25px;
   align-items: start;
-  gap: 84px;
   border-radius: 100px;
-  border-radius: 100px;
+  gap: 10px;
   background: linear-gradient(
     180deg,
     #828282 4.81%,
@@ -26,13 +25,13 @@
   box-shadow: 0 0 10px rgb(0, 83, 7);
   font-weight: 1000;
   margin: 10px;
+  max-width: fit-content;
 }
 .card-generation {
   display: inline-flex;
   padding: 4.5px 25px;
   align-items: start;
-  gap: 84px;
-  border-radius: 100px;
+  gap: 10px;
   border-radius: 100px;
   background: linear-gradient(
     180deg,
@@ -47,14 +46,16 @@
   box-shadow: 0 0 10px rgb(0, 83, 7);
   font-weight: 1000;
   margin: 10px;
+  max-width: fit-content;
 }
+
 .card-stats-flex {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 75px;
   font-family: sans-serif;
-  font-size: larger;
+  font-size: 15px;
 }
 .first {
   display: flex;
@@ -73,6 +74,7 @@
   justify-content: center;
   margin: 10px auto;
   font-size: larger;
+  font-family: sans-serif;
   font-weight: bolder;
 }
 .stat-row-flex {
@@ -84,15 +86,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 800px;
-  width: 500px;
+  height: 600px;
+  width: 350px;
   margin: 50px 0px;
   background-color: rgb(167, 223, 167);
   border-radius: 2%;
   border: rgb(205, 61, 85) solid 15px;
   box-shadow: 0 0 20px rgba(205, 61, 85, 1);
 }
-
+.card-image {
+  max-width: fit-content;
+  max-height: 300px;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 50px;
+  margin: 0px 50px;
+}
 /*
  * =====================================================
  * 🦊 PokéCSS - Feuille de styles
