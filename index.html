@@ -65,71 +65,208 @@
     Ce template est cloné par JavaScript pour chaque Pokémon.
     NE MODIFIE PAS les classes ou data-attributes !
   -->
+
+    <!-- (: effet carte :)-->
     <template id="pokemon-card-template">
-      <article class="card card-flex">
-        <!-- Image du Pokémon -->
-        <div class="card-image-container card-image-flex">
-          <img
-            src=""
-            alt="Image de Pokémon"
-            class="card-image"
-            data-field="image"
-          />
-        </div>
+      <div>
+        <hover-tilt tilt-factor="1.5" scale-factor="1.1">
+          <article class="card card-flex">
+            <!-- Image du Pokémon -->
+            <div class="card-image-container card-image-flex">
+              <img
+                src=""
+                alt="Image de Pokémon"
+                class="card-image"
+                data-field="image"
+              />
+            </div>
 
-        <!-- Informations principales -->
-        <div class="card-info card-info-flex">
-          <h2 class="card-name" data-field="name">Nom du Pokémon</h2>
-          <p class="card-id">
-            <span class="card-id-label">N°</span>
-            <span class="card-id-value" data-field="id">000</span>
-          </p>
-          <p class="card-generation">
-            <span class="card-generation-label">Génération:</span>
-            <span class="card-generation-value" data-field="generation">1</span>
-          </p>
-        </div>
+            <!-- Informations principales -->
+            <div class="card-info card-info-flex">
+              <h2 class="card-name" data-field="name">Nom du Pokémon</h2>
+              <p class="card-id">
+                <span class="card-id-label">N°</span>
+                <span class="card-id-value" data-field="id">000</span>
+              </p>
+              <p class="card-generation">
+                <span class="card-generation-label">Génération:</span>
+                <span class="card-generation-value" data-field="generation"
+                  >1</span
+                >
+              </p>
+            </div>
 
-        <!-- Types (badges) -->
-        <div class="card-types card-types-flex" data-field="types-container">
-          <!--
-          Exemple avec 2 badges de type.
-          JavaScript adaptera le nombre selon le Pokémon.
-        -->
-          <span class="type-badge" data-type="type1">Type 1</span>
-          <span class="type-badge" data-type="type2">Type 2</span>
-        </div>
+            <!-- Types (badges) -->
+            <div
+              class="card-types card-types-flex"
+              data-field="types-container"
+            >
+              <!--
+              Exemple avec 2 badges de type.
+              JavaScript adaptera le nombre selon le Pokémon.
+            -->
+              <span class="type-badge" data-type="type1">Type 1</span>
+              <span class="type-badge" data-type="type2">Type 2</span>
+            </div>
 
-        <!-- Statistiques -->
-        <div class="card-stats card-stats-flex">
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">PV</span>
-            <span class="stat-value" data-stat="hp">0</span>
-          </div>
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">Attaque</span>
-            <span class="stat-value" data-stat="attack">0</span>
-          </div>
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">Défense</span>
-            <span class="stat-value" data-stat="defense">0</span>
-          </div>
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">Attaque Spé.</span>
-            <span class="stat-value" data-stat="special-attack">0</span>
-          </div>
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">Défense Spé.</span>
-            <span class="stat-value" data-stat="special-defense">0</span>
-          </div>
-          <div class="stat-row stat-row-flex">
-            <span class="stat-label">Vitesse</span>
-            <span class="stat-value" data-stat="speed">0</span>
-          </div>
-        </div>
-      </article>
+            <!-- Statistiques -->
+            <div class="card-stats card-stats-flex">
+              <div class="first">
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">PV</span>
+                  <span class="stat-value" data-stat="hp">0</span>
+                </div>
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">Attaque</span>
+                  <span class="stat-value" data-stat="attack">0</span>
+                </div>
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">Défense</span>
+                  <span class="stat-value" data-stat="defense">0</span>
+                </div>
+              </div>
+              <div class="second">
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">Attaque Spé.</span>
+                  <span class="stat-value" data-stat="special-attack">0</span>
+                </div>
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">Défense Spé.</span>
+                  <span class="stat-value" data-stat="special-defense">0</span>
+                </div>
+                <div class="stat-row stat-row-flex">
+                  <span class="stat-label">Vitesse</span>
+                  <span class="stat-value" data-stat="speed">0</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </hover-tilt>
+      </div>
     </template>
 
+    <script
+      type="module"
+      src="https://unpkg.com/hover-tilt/dist/hover-tilt.js"
+    ></script>
     <script src="app.js"></script>
+    <!-- Ensure <hover-tilt> is upgraded and wrap .card if needed -->
+    <script>
+      (function () {
+        if (!window.customElements) return;
+
+        const upgradeRoot = (root = document) => {
+          try {
+            root.querySelectorAll &&
+              root.querySelectorAll("hover-tilt").forEach((el) => {
+                try {
+                  customElements.upgrade(el);
+                } catch (e) {
+                  // ignore
+                }
+              });
+          } catch (e) {
+            // ignore
+          }
+        };
+
+        const wrapCardWithHoverTilt = (card) => {
+          try {
+            if (card.closest && card.closest("hover-tilt")) return;
+            const wrapper = document.createElement("hover-tilt");
+            wrapper.setAttribute("tilt-factor", "1.5");
+            wrapper.setAttribute("scale-factor", "1.1");
+            const parent = card.parentNode;
+            if (!parent) return;
+            parent.replaceChild(wrapper, card);
+            wrapper.appendChild(card);
+
+            // Upgrade the new wrapper when possible
+            if (customElements.get("hover-tilt")) {
+              try {
+                customElements.upgrade(wrapper);
+              } catch (e) {}
+            } else if (customElements.whenDefined) {
+              customElements
+                .whenDefined("hover-tilt")
+                .then(() => {
+                  try {
+                    customElements.upgrade(wrapper);
+                  } catch (e) {}
+                })
+                .catch(() => {});
+            }
+          } catch (e) {
+            // ignore
+          }
+        };
+
+        const ensureCardsWrapped = (root = document) => {
+          try {
+            root.querySelectorAll &&
+              root.querySelectorAll(".card").forEach((card) => {
+                wrapCardWithHoverTilt(card);
+              });
+          } catch (e) {}
+        };
+
+        // When definition is ready, upgrade existing <hover-tilt> and ensure .card are wrapped
+        const whenReady = () => {
+          upgradeRoot(document);
+          ensureCardsWrapped(document);
+        };
+
+        if (customElements.get("hover-tilt")) {
+          whenReady();
+        } else if (customElements.whenDefined) {
+          customElements
+            .whenDefined("hover-tilt")
+            .then(whenReady)
+            .catch(() => {});
+        }
+
+        // Observe future additions and upgrade/wrap matching nodes
+        const mo = new MutationObserver((mutations) => {
+          for (const m of mutations) {
+            for (const node of m.addedNodes) {
+              if (node.nodeType !== 1) continue;
+              try {
+                // If a hover-tilt was added directly, upgrade it
+                if (node.matches && node.matches("hover-tilt")) {
+                  try {
+                    customElements.upgrade(node);
+                  } catch (e) {}
+                }
+
+                // If a .card was added without a hover-tilt wrapper, wrap it
+                if (node.matches && node.matches(".card")) {
+                  wrapCardWithHoverTilt(node);
+                }
+
+                // Also handle nested cases (fragments, templates, etc.)
+                if (node.querySelectorAll) {
+                  node.querySelectorAll("hover-tilt").forEach((el) => {
+                    try {
+                      customElements.upgrade(el);
+                    } catch (e) {}
+                  });
+
+                  node.querySelectorAll(".card").forEach((card) => {
+                    wrapCardWithHoverTilt(card);
+                  });
+                }
+              } catch (e) {
+                // ignore
+              }
+            }
+          }
+        });
+
+        mo.observe(document.documentElement || document, {
+          childList: true,
+          subtree: true,
+        });
+      })();
+    </script>
   </body>
 </html>

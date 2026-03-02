@@ -19,7 +19,7 @@
   // Pokémon affiché par défaut au chargement de la page.
   // Change ce nom si tu veux un autre Pokémon de départ.
   // Mets null ou '' pour ne pas charger de Pokémon par défaut.
-  const DEFAULT_POKEMON = "Gruikui";
+  const DEFAULT_POKEMON = null;
   // =====================================================
 
   // URL de base de l'API Pokémon
